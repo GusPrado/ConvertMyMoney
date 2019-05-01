@@ -9,13 +9,14 @@ app.set('view engine','ejs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, 'public')))
 
-console.log('inicio promise')
+//console.log('inicio promise')
 app.get('/', async(req, res) => {
     const cotacao = await apiBCB.getCotacao()
-    console.log('cotacao', cotacao)
-    res.render('home') 
+    res.render('home', {
+        cotacao
+    }) 
 })
-console.log ('fim promise')
+//console.log ('fim promise')
 
 app.get('/cotacao', (req, res) => {
     const { cotacao, quantidade } = req.query
